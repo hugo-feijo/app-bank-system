@@ -6,11 +6,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesRoutingModule } from './clientes-router.module';
 import { ClientesListPageComponent } from './components/clientes-list-page/clientes-list-page.component';
 import { ClientesService } from './services/clientes.service';
+import { ClientesFormPageComponent } from './components/clientes-form-page/clientes-form-page.component';
 
 
 
 @NgModule({
-  declarations: [ClientesListPageComponent],
+  declarations: [ClientesListPageComponent, ClientesFormPageComponent],
   imports: [
     CommonModule, 
     HttpClientModule, 

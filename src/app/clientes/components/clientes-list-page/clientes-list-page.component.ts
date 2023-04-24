@@ -3,7 +3,8 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ClienteInterface } from "../../types/cliente.interface";
 import { Subscription } from "rxjs";
 import { ClientesService } from "../../services/clientes.service";
-import { AlertController, LoadingController, ToastController } from "@ionic/angular";
+import { AlertController, LoadingController, ModalController, ToastController } from "@ionic/angular";
+import { ClientesFormPageComponent } from "../clientes-form-page/clientes-form-page.component";
 
 @Component({
     selector: 'app-clientes-list-page',
@@ -18,7 +19,8 @@ export class ClientesListPageComponent implements OnInit{
     private clientesService: ClientesService,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private toastController: ToastController,) {}
+    private toastController: ToastController,
+    private modalCtrl: ModalController,) {}
 
   ngOnInit (): void {
     this.findAll();
@@ -49,5 +51,18 @@ export class ClientesListPageComponent implements OnInit{
         busyLoader.dismiss();
       });
     this.subscriptions.add(subscription);
+  }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: ClientesFormPageComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      console.log(`Hello, ${data}!`);
+    }
   }
 }  
