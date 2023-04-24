@@ -4,11 +4,13 @@ import { HttpClientModule } from "@angular/common/http";
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientesRoutingModule } from './clientes-router.module';
+import { ClientesListPageComponent } from './components/clientes-list-page/clientes-list-page.component';
+import { ClientesService } from './services/clientes.service';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ClientesListPageComponent],
   imports: [
     CommonModule, 
     HttpClientModule, 
@@ -16,6 +18,7 @@ import { ClientesRoutingModule } from './clientes-router.module';
     FormsModule, 
     ReactiveFormsModule, 
     ClientesRoutingModule
-  ]
+  ],
+  providers: [ClientesService]
 })
 export class ClientesModule { }

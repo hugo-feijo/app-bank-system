@@ -1,1 +1,23 @@
-<h1>Listar Clientes</h1>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Clientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let cliente of clientes">
+    <ion-card-header>
+      <ion-card-title>{{cliente.nome}}</ion-card-title>
+      <ion-card-subtitle>Nascido em: {{cliente.dataNascimento | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-text color="tertiary">
+        <p>CPF: {{cliente.cpf}}</p>
+      </ion-text>
+      <ion-text color="tertiary">
+        <p>RG: {{cliente.rg}}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
