@@ -23,4 +23,8 @@ export class ClientesService {
     update(cliente: ClienteInterface, id: String): Observable<ClienteInterface> {
       return this.httpClient.put<ClienteInterface>(`${environment.apiUrl}/clientes/${id}`, cliente);
     }
+
+    delete(id: String): Observable<ClienteInterface> {
+      return this.httpClient.delete<ClienteInterface>(`${environment.apiUrl}/clientes/${id}`);
+    }
 }

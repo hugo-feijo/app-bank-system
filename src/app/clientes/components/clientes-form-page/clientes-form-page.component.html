@@ -66,9 +66,12 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
-    </ion-buttons>  
+    </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="confirm()" [strong]="true" [disabled]="clienteForm.invalid">Salvar</ion-button>
+      <ion-button *ngIf="cliente?.id" (click)="deleteCliente(cliente.id)" [strong]="true" color="danger">Excluir</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true" [disabled]="clienteForm.invalid" color="primary">Salvar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

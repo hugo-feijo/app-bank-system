@@ -56,40 +56,65 @@ export class ClientesFormPageComponent implements OnInit{
   }
 
   confirm(): void {
-
     if(this.cliente?.id) {
-      this.subscriptions.add(
-        this.clientesService.update(this.clienteForm.value, this.cliente.id).subscribe(
-          () => {
-            this.modalCtrl.dismiss(this.name, 'confirm');
-          },
-          async () => {
-            const alerta = await this.alertController.create({
-              header: 'Erro',
-              message: 'Não foi possível atualizar os dados do cliente',
-              buttons: ['Ok']
-            })
-            alerta.present()
-          }
-        )
-      )
+      this.updateCliente(this.clienteForm.value)
     } else {
-      this.subscriptions.add(
-        this.clientesService.save(this.clienteForm.value).subscribe(
-          () => {
-            this.modalCtrl.dismiss(this.name, 'confirm');
-          },
-          async () => {
-            const alerta = await this.alertController.create({
-              header: 'Erro',
-              message: 'Não foi possível salvar os dados do cliente',
-              buttons: ['Ok']
-            })
-            alerta.present()
-          }
-        )
-      )
+      this.saveCliente(this.clienteForm.value)
     }
-    
+  }
+
+  saveCliente(cliente: ClienteInterface): void {
+    this.subscriptions.add(
+      this.clientesService.save(cliente).subscribe(
+        () => {
+          this.modalCtrl.dismiss(cliente, 'confirm');
+        },
+        async () => {
+          const alerta = await this.alertController.create({
+            header: 'Erro',
+            message: 'Não foi possível salvar os dados do cliente',
+            buttons: ['Ok']
+          })
+          alerta.present()
+        }
+      )
+    )
+  }
+
+  updateCliente(cliente: ClienteInterface): void {
+    this.subscriptions.add(
+      this.clientesService.update(cliente, this.cliente.id).subscribe(
+        () => {
+          this.modalCtrl.dismiss(cliente, 'confirm');
+        },
+        async () => {
+          const alerta = await this.alertController.create({
+            header: 'Erro',
+            message: 'Não foi possível atualizar os dados do cliente',
+            buttons: ['Ok']
+          })
+          alerta.present()
+        }
+      )
+    )
+  }
+
+  deleteCliente(clienteId: string): void {
+    this.subscriptions.add(
+      this.clientesService.delete(clienteId).subscribe(
+        () => {
+          this.modalCtrl.dismiss(clienteId, 'confirm');
+        },
+        async () => {
+          const alerta = await this.alertController.create({
+            header: 'Erro',
+            message: 'Não foi possível deletar os dados do cliente',
+            buttons: ['Ok']
+          })
+          alerta.present()
+        }
+      )
+    )
+
   }
 }
