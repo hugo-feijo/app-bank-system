@@ -62,7 +62,7 @@ export class ClientesListPageComponent implements OnInit{
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'confirm') {
-      console.log(`Hello, ${data}!`);
+      this.findAll();
     }
   }
 }  

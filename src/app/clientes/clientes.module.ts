@@ -11,7 +11,6 @@ import { ClientesFormPageComponent } from './components/clientes-form-page/clien
 
 
 @NgModule({
-  declarations: [ClientesListPageComponent, ClientesFormPageComponent],
   imports: [
     CommonModule, 
     HttpClientModule, 
@@ -20,6 +19,7 @@ import { ClientesFormPageComponent } from './components/clientes-form-page/clien
     ReactiveFormsModule, 
     ClientesRoutingModule
   ],
+  declarations: [ClientesListPageComponent, ClientesFormPageComponent],
   providers: [ClientesService]
 })
 export class ClientesModule { }

@@ -11,8 +11,12 @@ export class ClientesService {
     constructor(private httpClient: HttpClient) {}
     
     findAll(): Observable<ClienteInterface[]> {
-        return this.httpClient.get<ClienteInterface[]>(
-            `${environment.apiUrl}/clientes`
-        )
+      return this.httpClient.get<ClienteInterface[]>(
+        `${environment.apiUrl}/clientes`
+      )
+    }
+
+    save(cliente: ClienteInterface): Observable<ClienteInterface> {
+      return this.httpClient.post<ClienteInterface>(`${environment.apiUrl}/clientes`, cliente);
     }
 }
