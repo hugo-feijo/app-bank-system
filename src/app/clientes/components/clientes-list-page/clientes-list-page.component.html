@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card *ngFor="let cliente of clientes">
+  <ion-card *ngFor="let cliente of clientes" (click)="openModal(cliente)" class="ion-activatable ripple-parent rounded-rectangle">
+    <ion-ripple-effect></ion-ripple-effect>
     <ion-card-header>
       <ion-card-title>{{cliente.nome}}</ion-card-title>
       <ion-card-subtitle>Nascido em: {{cliente.dataNascimento | date: 'dd/MM/yyyy' }}</ion-card-subtitle>
@@ -22,7 +23,7 @@
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="openModal()">
+    <ion-fab-button (click)="openModal(null)">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

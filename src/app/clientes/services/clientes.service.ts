@@ -19,4 +19,8 @@ export class ClientesService {
     save(cliente: ClienteInterface): Observable<ClienteInterface> {
       return this.httpClient.post<ClienteInterface>(`${environment.apiUrl}/clientes`, cliente);
     }
+
+    update(cliente: ClienteInterface, id: String): Observable<ClienteInterface> {
+      return this.httpClient.put<ClienteInterface>(`${environment.apiUrl}/clientes/${id}`, cliente);
+    }
 }

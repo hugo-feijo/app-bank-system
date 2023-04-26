@@ -53,9 +53,12 @@ export class ClientesListPageComponent implements OnInit{
     this.subscriptions.add(subscription);
   }
 
-  async openModal() {
+  async openModal(cliente: null|ClienteInterface) {
     const modal = await this.modalCtrl.create({
       component: ClientesFormPageComponent,
+      componentProps: {
+        cliente
+      }
     });
     modal.present();
 
