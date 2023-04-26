@@ -8,5 +8,15 @@
       "rg": "896575-85",
       "dataNascimento": "1998-03-02"
     }
+  ],
+  "contas": [
+    {
+      "id": "deg",
+      "idCliente": "abc",
+      "instituicao": "Nubank",
+      "agencia": "0001",
+      "conta": "789498-78",
+      "saldo": 176.63
+    }
   ]
 }

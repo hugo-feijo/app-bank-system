@@ -1,1 +1,27 @@
-<h1>Hello</h1>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Contas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let conta of contas" (click)="openModal(conta)" class="ion-activatable ripple-parent rounded-rectangle">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-title>{{conta.instituicao}} - {{conta.cliente.nome}}</ion-card-title>
+      <ion-card-subtitle>Agencia: {{conta.agencia}} | conta: {{conta.conta}} </ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-text color="tertiary">
+        <p>Saldo: {{conta.saldo | currency: 'BRL'}}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openModal(null)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

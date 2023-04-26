@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContaRoutingModule } from './conta-router.module';
 import { ContasListPageComponent } from './components/conta-list-page/conta-list-page.component';
+import { ContaService } from './service/conta.service';
+import { ClientesService } from '../clientes/services/clientes.service';
 
 
 
@@ -17,6 +19,7 @@ import { ContasListPageComponent } from './components/conta-list-page/conta-list
     ReactiveFormsModule, 
     ContaRoutingModule
   ],
-  declarations: [ContasListPageComponent]
+  declarations: [ContasListPageComponent],
+  providers: [ContaService, ClientesService]
 })
 export class ContaModule { }

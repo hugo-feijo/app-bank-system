@@ -32,6 +32,7 @@ export class ClientesListPageComponent implements OnInit{
 
     const subscription = this.clientesService.findAll()
       .subscribe(async (clientes) => {
+        window.localStorage.setItem('clientes', JSON.stringify(clientes));
         this.clientes = clientes;
         const toast = await this.toastController.create({
           color: 'success',
