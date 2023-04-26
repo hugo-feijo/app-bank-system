@@ -35,6 +35,7 @@ export class ClientesListPageComponent implements OnInit{
         this.clientes = clientes;
         const toast = await this.toastController.create({
           color: 'success',
+          position: 'top',
           message: 'Lista de clientes carregada com sucesso!',
           duration: 1500,
           buttons: ['X']

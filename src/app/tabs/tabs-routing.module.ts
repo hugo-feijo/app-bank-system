@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: () => import('../clientes/clientes.module').then(m => m.ClientesModule)
       },
       {
+        path: 'contas',
+        loadChildren: () => import('../conta/conta.module').then(m => m.ContaModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/clientes',
         pathMatch: 'full'
