@@ -1,10 +1,9 @@
 
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
-import { AlertController, LoadingController, ModalController, ToastController } from "@ionic/angular";
+import { AlertController, LoadingController, ModalController, ToastController, ViewWillEnter } from "@ionic/angular";
 import { ContaInterface } from "../../types/conta.interface";
 import { ContaService } from "../../service/conta.service";
-import { ClientesFormPageComponent } from "src/app/clientes/components/clientes-form-page/clientes-form-page.component";
 import { ClienteInterface } from "src/app/clientes/types/cliente.interface";
 import { ClientesService } from "src/app/clientes/services/clientes.service";
 import { ContaFormPageComponent } from "../conta-form-page/conta-form-page.component";
@@ -13,7 +12,7 @@ import { ContaFormPageComponent } from "../conta-form-page/conta-form-page.compo
     selector: 'app-conta-list-page',
     templateUrl: './conta-list-page.component.html'
 }) 
-export class ContasListPageComponent implements OnInit{
+export class ContasListPageComponent implements ViewWillEnter{
   
   contas: ContaInterface[] = [];
   clientes: ClienteInterface[] = [];
@@ -27,7 +26,7 @@ export class ContasListPageComponent implements OnInit{
     private toastController: ToastController,
     private modalCtrl: ModalController,) {}
 
-  ngOnInit (): void {
+  ionViewWillEnter (): void {
     this.findAll();
   }
 
