@@ -7,6 +7,7 @@ import { ContaService } from "../../service/conta.service";
 import { ClientesFormPageComponent } from "src/app/clientes/components/clientes-form-page/clientes-form-page.component";
 import { ClienteInterface } from "src/app/clientes/types/cliente.interface";
 import { ClientesService } from "src/app/clientes/services/clientes.service";
+import { ContaFormPageComponent } from "../conta-form-page/conta-form-page.component";
 
 @Component({
     selector: 'app-conta-list-page',
@@ -15,6 +16,7 @@ import { ClientesService } from "src/app/clientes/services/clientes.service";
 export class ContasListPageComponent implements OnInit{
   
   contas: ContaInterface[] = [];
+  clientes: ClienteInterface[] = [];
   subscriptions = new Subscription();
 
   constructor(
@@ -36,6 +38,7 @@ export class ContasListPageComponent implements OnInit{
     const subscriptionConta = this.contaService.findAll()
       .subscribe(async (contas) => {
         const subscriptionCliente = this.getClientes().subscribe(clientes => {
+          this.clientes = clientes;
           window.localStorage.setItem('clientes', JSON.stringify(clientes));
           this.contas = this.loadClientes(contas, clientes);
         })
@@ -82,11 +85,12 @@ export class ContasListPageComponent implements OnInit{
     return new Observable((subscribe) => subscribe.next(JSON.parse(window.localStorage.getItem('clientes')!)));
   }
 
-  async openModal(cliente: null|ContaInterface) {
+  async openModal(conta: null|ContaInterface) {
     const modal = await this.modalCtrl.create({
-      component: ClientesFormPageComponent,
+      component: ContaFormPageComponent,
       componentProps: {
-        cliente
+        conta: conta,
+        clientes: this.clientes
       }
     });
     modal.present();

@@ -7,6 +7,7 @@ import { ContaRoutingModule } from './conta-router.module';
 import { ContasListPageComponent } from './components/conta-list-page/conta-list-page.component';
 import { ContaService } from './service/conta.service';
 import { ClientesService } from '../clientes/services/clientes.service';
+import { ContaFormPageComponent } from './components/conta-form-page/conta-form-page.component';
 
 
 
@@ -19,7 +20,7 @@ import { ClientesService } from '../clientes/services/clientes.service';
     ReactiveFormsModule, 
     ContaRoutingModule
   ],
-  declarations: [ContasListPageComponent],
+  declarations: [ContasListPageComponent, ContaFormPageComponent],
   providers: [ContaService, ClientesService]
 })
 export class ContaModule { }
