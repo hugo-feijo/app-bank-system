@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastro do Cartão</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="clienteForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Cliente</ion-label>
+        <ion-select formControlName="idCliente" placeholder="Selecione o cliente" arial-label="Clientes">
+          <ion-select-option *ngFor="let cliente of clientes" [value]="cliente.id" >{{cliente.nome}}</ion-select-option>
+        </ion-select>
+        <ion-note slot="error" *ngIf="clienteForm.controls['idCliente'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nome</ion-label>
+        <ion-input formControlName="nome" placeholder="Título do cartão"></ion-input>
+        <ion-note slot="error" *ngIf="clienteForm.controls['nome'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+        <ion-note slot="error" *ngIf="clienteForm.controls['nome'].hasError('maxlength')">
+          O campo deve ter no máximo {{clienteForm.controls['nome'].errors?.['maxlength'].requiredLength}} caracteres
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Limite</ion-label>
+        <ion-input formControlName="limite" placeholder="Limite do cartão" type="number"></ion-input>
+        <ion-note slot="error" *ngIf="clienteForm.controls['limite'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Valor da Próxima Fatura</ion-label>
+        <ion-input formControlName="valorProximaFatura" placeholder="Valor da próxima fatura" type="number"></ion-input>
+        <ion-note slot="error" *ngIf="clienteForm.controls['valorProximaFatura'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Vencimento próxima fatura</ion-label>
+        <ion-datetime-button datetime="vencimentoFatura"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime formControlName="vencimentoFatura" id="vencimentoFatura" presentation="date" showDefaultButtons="true" 
+            doneText="Selecionar" cancelText="Cancelar" showDefaultTitle="true">
+              <span slot="title">Selecione a data de vencimento</span>
+            </ion-datetime>
+          </ng-template>
+        </ion-modal>
+        <ion-note slot="error" *ngIf="clienteForm.controls['vencimentoFatura'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fechamento da Fatura</ion-label> <!--Aqui é a data do fechamento da fatura-->
+        <ion-input formControlName="diaFechamento" placeholder="Dia do fechamento da Fatura" type="number"></ion-input>
+        <ion-note slot="error" *ngIf="clienteForm.controls['diaFechamento'].hasError('required')">
+          O campo é obrigatório
+        </ion-note>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="cartao?.id" (click)="deleteCartao(cartao.id)" [strong]="true" color="danger">Excluir</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true" [disabled]="clienteForm.invalid" color="primary">Salvar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cartão de Crédito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let cartao of cartoes" (click)="openModal(cartao)" class="ion-activatable ripple-parent rounded-rectangle">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-header>
+      <ion-card-title>{{cartao.nome}} - {{cartao.cliente.nome}}</ion-card-title>
+      <ion-card-subtitle>Limite: {{cartao.limite | currency: 'BRL'}} | Fechamento: {{cartao.diaFechamento}} </ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-text color="tertiary">
+        <p>Valor da Proxima Fatura: {{cartao.valorProximaFatura | currency: 'BRL'}}</p>
+        <p>Vencimento da Proxima Fatura: {{cartao.vencimentoFatura | date: 'dd/MM/yyyy' }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openModal(null)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

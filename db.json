@@ -11,12 +11,32 @@
   ],
   "contas": [
     {
-      "id": "deg",
       "idCliente": "abc",
-      "instituicao": "Nubank",
-      "agencia": "0001",
-      "conta": "789498-78",
-      "saldo": 176.63
+      "instituicao": "Caixa",
+      "agencia": "0006",
+      "conta": "000000-00",
+      "saldo": 50000,
+      "id": "s3-GraV"
+    }
+  ],
+  "cartao-credito": [
+    {
+      "idCliente": "abc",
+      "nome": "Nubank",
+      "limite": 66589,
+      "valorProximaFatura": "100",
+      "vencimentoFatura": "2023-05-08",
+      "diaFechamento": 9,
+      "id": 1
+    },
+    {
+      "idCliente": "abc",
+      "nome": "Credit Card",
+      "limite": 75000,
+      "valorProximaFatura": 3500,
+      "vencimentoFatura": "2023-05-10",
+      "diaFechamento": 10,
+      "id": 2
     }
   ]
 }
