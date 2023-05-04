@@ -45,7 +45,7 @@ export class CartaoCreditoListPageComponent implements ViewWillEnter{
         const toast = await this.toastController.create({
           color: 'success',
           position: 'top',
-          message: 'Lista de contas carregada com sucesso!',
+          message: 'Lista de cartões carregada com sucesso!',
           duration: 1500,
           buttons: ['X']
         })
@@ -54,7 +54,7 @@ export class CartaoCreditoListPageComponent implements ViewWillEnter{
       }, async () => {
         const alerta = await this.alertController.create({
           header: 'Erro',
-          message: 'Não foi possível carregar a lista de contas',
+          message: 'Não foi possível carregar a lista de cartões',
           buttons: ['Ok']
         })
         alerta.present()

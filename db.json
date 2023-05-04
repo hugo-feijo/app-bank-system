@@ -7,6 +7,14 @@
       "cpf": "789.523.657-89",
       "rg": "896575-85",
       "dataNascimento": "1998-03-02"
+    },
+    {
+      "nome": "Arthur",
+      "genero": "M",
+      "cpf": "1214234234234",
+      "rg": "234234234",
+      "dataNascimento": "1970-01-15",
+      "id": "LMQ_8BD"
     }
   ],
   "contas": [
@@ -15,7 +23,7 @@
       "instituicao": "Caixa",
       "agencia": "0006",
       "conta": "000000-00",
-      "saldo": 50000,
+      "saldo": 55000,
       "id": "s3-GraV"
     }
   ],
@@ -24,7 +32,7 @@
       "idCliente": "abc",
       "nome": "Nubank",
       "limite": 66589,
-      "valorProximaFatura": "100",
+      "valorProximaFatura": 17000,
       "vencimentoFatura": "2023-05-08",
       "diaFechamento": 9,
       "id": 1
@@ -33,7 +41,7 @@
       "idCliente": "abc",
       "nome": "Credit Card",
       "limite": 75000,
-      "valorProximaFatura": 3500,
+      "valorProximaFatura": 35000,
       "vencimentoFatura": "2023-05-10",
       "diaFechamento": 10,
       "id": 2

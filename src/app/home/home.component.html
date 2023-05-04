@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="init($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Total em conta</ion-card-title>
+      <ion-card-subtitle>Valor total em conta corrente</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-label [color]="totalConta > 0 ? 'success' : 'danger'">
+        <ion-icon name="caret-up-outline" *ngIf="totalConta > 0"></ion-icon>
+        <ion-icon name="caret-down-outline" *ngIf="totalConta < 0"></ion-icon>
+        <h1 class="money-label">
+          {{totalConta | currency: 'BRL'}}
+        </h1>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Total em próxima fatura</ion-card-title>
+      <ion-card-subtitle>Valor para próxima fatura</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-label [color]="(totalConta - totalFatura) > 0 ? 'success' : 'danger'">
+        <ion-icon name="caret-up-outline" *ngIf="(totalConta - totalFatura) > 0"></ion-icon>
+        <ion-icon name="caret-down-outline" *ngIf="(totalConta - totalFatura) < 0"></ion-icon>
+        <h1 class="money-label">
+          {{totalFatura | currency: 'BRL'}}
+        </h1>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
