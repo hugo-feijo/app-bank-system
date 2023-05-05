@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 import { AlertController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -37,7 +37,8 @@ export class ClientesFormPageComponent implements OnInit{
         this.cliente?.cpf ? this.cliente.cpf : '', 
         [
           Validators.required, 
-          Validators.maxLength(14)
+          Validators.maxLength(14),
+          this.validaFormatoCpf()
         ]
       ],
       rg: [
@@ -49,6 +50,16 @@ export class ClientesFormPageComponent implements OnInit{
         Validators.required
       ]
     })
+  }
+
+  validaFormatoCpf(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value.toLowerCase();
+      if (value != "" && !/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/.test(value)) {
+        return { invalidCpf: 'xyz' }
+      }
+      return null;
+    };
   }
 
   cancel() {

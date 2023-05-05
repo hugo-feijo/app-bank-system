@@ -27,6 +27,9 @@
         <ion-note slot="error" *ngIf="clienteForm.controls['cpf'].hasError('maxlength')">
           O campo deve ter no máximo {{clienteForm.controls['cpf'].errors?.['maxlength'].requiredLength}} caracteres
         </ion-note>
+        <ion-note slot="error" *ngIf="clienteForm.controls['cpf'].hasError('invalidCpf')">
+          Formato inválido de cpf, usar 000.000.000-00  
+        </ion-note>
       </ion-item>
       <ion-item>
         <ion-label>RG</ion-label>

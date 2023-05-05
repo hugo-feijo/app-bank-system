@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 import { AlertController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -21,6 +21,7 @@ export class CartaoCreditoFormPageComponent implements OnInit{
 
   clienteForm!: FormGroup;
   subscriptions = new Subscription();
+  vencimentoFatura: Date | null = null;
 
   constructor(
     private modalCtrl: ModalController,
@@ -29,6 +30,9 @@ export class CartaoCreditoFormPageComponent implements OnInit{
     private alertController: AlertController) {}
 
   ngOnInit (): void {
+    if (this.cartao?.vencimentoFatura) {
+      this.vencimentoFatura = this.cartao.vencimentoFatura;
+    }
     this.clienteForm = this.formBuilder.group({
       idCliente: [
         this.cartao?.idCliente ? this.cartao.idCliente : '',
@@ -47,17 +51,36 @@ export class CartaoCreditoFormPageComponent implements OnInit{
       ],
       valorProximaFatura: [
         this.cartao?.valorProximaFatura ? this.cartao.valorProximaFatura : '',
-        Validators.required
+        [
+          Validators.required,
+        ]
       ],
       vencimentoFatura: [
         this.cartao?.vencimentoFatura ? this.cartao.vencimentoFatura : '2023-05-03',
-        Validators.required
+        [
+          Validators.required,
+          this.validaVencimento()
+        ]
       ],
       diaFechamento: [
         this.cartao?.diaFechamento ? this.cartao.diaFechamento : '',
-        Validators.required
+        [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(31)
+        ]
       ]
     })
+  }
+
+  validaVencimento(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors  | null => {
+      const value = control.value;
+      if (value && this.vencimentoFatura && value < this.vencimentoFatura) {
+        return { invalidVencimento: 'xyz' }
+      }
+      return null;
+    };
   }
 
   cancel() {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 import { AlertController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -47,13 +47,26 @@ export class ContaFormPageComponent implements OnInit{
       ],
       conta: [
         this.conta?.conta ? this.conta.conta : '',
-        Validators.required
+        [
+          Validators.required,
+          this.validaFormatoConta()
+        ]
       ],
       saldo: [
         this.conta?.saldo ? this.conta.saldo : '',
         Validators.required
       ]
     })
+  }
+
+  validaFormatoConta(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors  | null => {
+      const value = control.value.toLowerCase();
+      if (value != "" && !value.includes('-')) {
+        return { invalidConta: 'xyz' }
+      }
+      return null;
+    };
   }
 
   cancel() {

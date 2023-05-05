@@ -39,6 +39,9 @@
         <ion-note slot="error" *ngIf="clienteForm.controls['conta'].hasError('required')">
           O campo é obrigatório
         </ion-note>
+        <ion-note slot="error" *ngIf="clienteForm.controls['conta'].hasError('invalidConta')">
+          Informe o digito da conta com um hífen, nesse formato 00000-00
+        </ion-note>
       </ion-item>
       <ion-item>
         <ion-label>Saldo</ion-label>

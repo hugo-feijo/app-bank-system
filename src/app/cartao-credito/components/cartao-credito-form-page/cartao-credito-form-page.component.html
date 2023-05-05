@@ -39,6 +39,9 @@
         <ion-note slot="error" *ngIf="clienteForm.controls['valorProximaFatura'].hasError('required')">
           O campo é obrigatório
         </ion-note>
+        <ion-note slot="error" *ngIf="clienteForm.errors?.['invalidValue']">
+          Valor acima do limite cadastrado.
+        </ion-note>
       </ion-item>
       <ion-item>
         <ion-label>Vencimento próxima fatura</ion-label>
@@ -54,12 +57,18 @@
         <ion-note slot="error" *ngIf="clienteForm.controls['vencimentoFatura'].hasError('required')">
           O campo é obrigatório
         </ion-note>
+        <ion-note slot="error" *ngIf="clienteForm.controls['vencimentoFatura'].hasError('invalidVencimento')">
+          A data de vencimento não pode ser menor que {{this.vencimentoFatura | date: 'dd/MM/yyyy'}}
+        </ion-note>
       </ion-item>
       <ion-item>
         <ion-label>Fechamento da Fatura</ion-label> <!--Aqui é a data do fechamento da fatura-->
         <ion-input formControlName="diaFechamento" placeholder="Dia do fechamento da Fatura" type="number"></ion-input>
         <ion-note slot="error" *ngIf="clienteForm.controls['diaFechamento'].hasError('required')">
           O campo é obrigatório
+        </ion-note>
+        <ion-note slot="error" *ngIf="clienteForm.controls['diaFechamento'].hasError('min') || clienteForm.controls['diaFechamento'].hasError('max')">
+          O valor precisa ser maior que 1 e menor que 31
         </ion-note>
       </ion-item>
     </ion-list>
