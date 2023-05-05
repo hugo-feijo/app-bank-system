@@ -46,7 +46,7 @@ export class ClientesListPageComponent implements OnInit{
       }, async () => {
         const alerta = await this.alertController.create({
           header: 'Erro',
-          message: 'Não foi possível carregar a lista de autores',
+          message: 'Não foi possível carregar a lista de clientes',
           buttons: ['Ok']
         })
         alerta.present()
