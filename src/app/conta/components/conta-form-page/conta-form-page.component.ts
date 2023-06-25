@@ -31,7 +31,7 @@ export class ContaFormPageComponent implements OnInit{
   ngOnInit (): void {
     this.clienteForm = this.formBuilder.group({
       idCliente: [
-        this.conta?.idCliente ? this.conta.idCliente : '',
+        this.conta?.cliente?.id ? this.conta.cliente.id : '',
         Validators.required
       ],
       instituicao: [
@@ -81,11 +81,12 @@ export class ContaFormPageComponent implements OnInit{
     }
   }
 
-  saveConta(cliente: ContaInterface): void {
+  saveConta(conta: ContaInterface): void {
+    conta.cliente = this.clientes.filter(c => c.id == conta.idCliente)[0];
     this.subscriptions.add(
-      this.contaService.save(cliente).subscribe(
+      this.contaService.save(conta).subscribe(
         () => {
-          this.modalCtrl.dismiss(cliente, 'confirm');
+          this.modalCtrl.dismiss(conta, 'confirm');
         },
         async (error) => {
           const alerta = await this.alertController.create({
@@ -99,11 +100,12 @@ export class ContaFormPageComponent implements OnInit{
     )
   }
 
-  updateConta(cliente: ContaInterface): void {
+  updateConta(conta: ContaInterface): void {
+    conta.cliente = this.clientes.filter(c => c.id == conta.idCliente)[0];
     this.subscriptions.add(
-      this.contaService.update(cliente, this.conta.id).subscribe(
+      this.contaService.update(conta, this.conta.id).subscribe(
         () => {
-          this.modalCtrl.dismiss(cliente, 'confirm');
+          this.modalCtrl.dismiss(conta, 'confirm');
         },
         async (error) => {
           const alerta = await this.alertController.create({

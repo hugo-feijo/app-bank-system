@@ -35,7 +35,7 @@ export class CartaoCreditoFormPageComponent implements OnInit{
     }
     this.clienteForm = this.formBuilder.group({
       idCliente: [
-        this.cartao?.idCliente ? this.cartao.idCliente : '',
+        this.cartao?.cliente?.id ? this.cartao.cliente.id : '',
         Validators.required
       ],
       nome: [
@@ -95,11 +95,12 @@ export class CartaoCreditoFormPageComponent implements OnInit{
     }
   }
 
-  saveCartao(cliente: CartaoCreditoInterface): void {
+  saveCartao(cartao: CartaoCreditoInterface): void {
+    cartao.cliente = this.clientes.filter(c => c.id == cartao.idCliente)[0];
     this.subscriptions.add(
-      this.cartaoCreditoService.save(cliente).subscribe(
+      this.cartaoCreditoService.save(cartao).subscribe(
         () => {
-          this.modalCtrl.dismiss(cliente, 'confirm');
+          this.modalCtrl.dismiss(cartao, 'confirm');
         },
         async (error) => {
           const alerta = await this.alertController.create({
@@ -113,11 +114,12 @@ export class CartaoCreditoFormPageComponent implements OnInit{
     )
   }
 
-  updateCartao(cliente: CartaoCreditoInterface): void {
+  updateCartao(cartao: CartaoCreditoInterface): void {
+    cartao.cliente = this.clientes.filter(c => c.id == cartao.idCliente)[0];
     this.subscriptions.add(
-      this.cartaoCreditoService.update(cliente, this.cartao.id).subscribe(
+      this.cartaoCreditoService.update(cartao, this.cartao.id).subscribe(
         () => {
-          this.modalCtrl.dismiss(cliente, 'confirm');
+          this.modalCtrl.dismiss(cartao, 'confirm');
         },
         async (error) => {
           const alerta = await this.alertController.create({
