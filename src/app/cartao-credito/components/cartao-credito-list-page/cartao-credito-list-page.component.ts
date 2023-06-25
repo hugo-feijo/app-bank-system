@@ -35,11 +35,11 @@ export class CartaoCreditoListPageComponent implements ViewWillEnter{
     busyLoader.present()
 
     const subscriptionConta = this.cartaoCreditoService.findAll()
-      .subscribe(async (contas) => {
+      .subscribe(async (cartao) => {
         const subscriptionCliente = this.getClientes().subscribe(clientes => {
           this.clientes = clientes;
           window.localStorage.setItem('clientes', JSON.stringify(clientes));
-          this.cartoes = this.loadClientes(contas, clientes);
+          this.cartoes = cartao;
         })
         this.subscriptions.add(subscriptionCliente);
         const toast = await this.toastController.create({
@@ -61,21 +61,6 @@ export class CartaoCreditoListPageComponent implements ViewWillEnter{
         busyLoader.dismiss();
       });
     this.subscriptions.add(subscriptionConta);
-  }
-
-  loadClientes(contas: CartaoCreditoInterface[], clientes: ClienteInterface[]): CartaoCreditoInterface[] {
-    return contas.map(conta => {
-      return {
-        cliente: clientes.filter(cliente => cliente.id == conta.idCliente)[0],
-        id: conta.id,
-        idCliente: conta.idCliente,
-        nome: conta.nome,
-        limite: conta.limite,
-        valorProximaFatura: conta.valorProximaFatura,
-        vencimentoFatura: conta.vencimentoFatura,
-        diaFechamento: conta.diaFechamento
-      }
-    })
   }
 
   getClientes(): Observable<ClienteInterface[]>  {

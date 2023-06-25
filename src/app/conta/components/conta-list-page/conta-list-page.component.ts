@@ -39,7 +39,7 @@ export class ContasListPageComponent implements ViewWillEnter{
         const subscriptionCliente = this.getClientes().subscribe(clientes => {
           this.clientes = clientes;
           window.localStorage.setItem('clientes', JSON.stringify(clientes));
-          this.contas = this.loadClientes(contas, clientes);
+          this.contas = contas;
         })
         this.subscriptions.add(subscriptionCliente);
         const toast = await this.toastController.create({
@@ -61,20 +61,6 @@ export class ContasListPageComponent implements ViewWillEnter{
         busyLoader.dismiss();
       });
     this.subscriptions.add(subscriptionConta);
-  }
-
-  loadClientes(contas: ContaInterface[], clientes: ClienteInterface[]): ContaInterface[] {
-    return contas.map(conta => {
-      return {
-        cliente: clientes.filter(cliente => cliente.id == conta.idCliente)[0],
-        id: conta.id,
-        idCliente: conta.idCliente,
-        instituicao: conta.instituicao,
-        agencia: conta.agencia,
-        conta: conta.conta,
-        saldo: conta.saldo
-      }
-    })
   }
 
   getClientes(): Observable<ClienteInterface[]>  {

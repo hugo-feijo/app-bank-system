@@ -12,19 +12,19 @@ export class CartaoCreditoService {
     
     findAll(): Observable<CartaoCreditoInterface[]> {
       return this.httpClient.get<CartaoCreditoInterface[]>(
-        `${environment.apiUrl}/cartao-credito`
+        `${environment.apiUrl}/cartoes`
       )
     }
 
     save(cliente: CartaoCreditoInterface): Observable<CartaoCreditoInterface> {
-      return this.httpClient.post<CartaoCreditoInterface>(`${environment.apiUrl}/cartao-credito`, cliente);
+      return this.httpClient.post<CartaoCreditoInterface>(`${environment.apiUrl}/cartoes`, cliente);
     }
 
     update(cliente: CartaoCreditoInterface, id: String): Observable<CartaoCreditoInterface> {
-      return this.httpClient.put<CartaoCreditoInterface>(`${environment.apiUrl}/cartao-credito/${id}`, cliente);
+      return this.httpClient.put<CartaoCreditoInterface>(`${environment.apiUrl}/cartoes/${id}`, cliente);
     }
 
     delete(id: String): Observable<CartaoCreditoInterface> {
-      return this.httpClient.delete<CartaoCreditoInterface>(`${environment.apiUrl}/cartao-credito/${id}`);
+      return this.httpClient.delete<CartaoCreditoInterface>(`${environment.apiUrl}/cartoes/${id}`);
     }
 }
