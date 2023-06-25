@@ -80,10 +80,10 @@ export class ClientesFormPageComponent implements OnInit{
         () => {
           this.modalCtrl.dismiss(cliente, 'confirm');
         },
-        async () => {
+        async (error) => {
           const alerta = await this.alertController.create({
             header: 'Erro',
-            message: 'Não foi possível salvar os dados do cliente',
+            message: error.status == 400 && error.error.message ? error.error.message : 'Não foi possível salvar os dados do cliente',
             buttons: ['Ok']
           })
           alerta.present()
@@ -98,10 +98,10 @@ export class ClientesFormPageComponent implements OnInit{
         () => {
           this.modalCtrl.dismiss(cliente, 'confirm');
         },
-        async () => {
+        async (error) => {
           const alerta = await this.alertController.create({
             header: 'Erro',
-            message: 'Não foi possível atualizar os dados do cliente',
+            message: error.status == 400 && error.error.message ? error.error.message : 'Não foi possível salvar os dados do cliente',
             buttons: ['Ok']
           })
           alerta.present()
