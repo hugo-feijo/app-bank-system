@@ -7,6 +7,7 @@ import { ClienteInterface } from '../clientes/types/cliente.interface';
 import { ClientesService } from '../clientes/services/clientes.service';
 import { CartaoCreditoService } from '../cartao-credito/service/cartao-credito.service';
 import { CartaoCreditoInterface } from '../cartao-credito/types/cartao-credito.interface';
+import { HomeService } from './service/home.service';
 
 @Component({
   selector: 'app-conta',
@@ -17,15 +18,10 @@ export class HomeComponent  implements OnInit {
 
   public totalConta: number = 0;
   public totalFatura: number = 0;
-  public contas: ContaInterface[] = [];
-  public cartoes: CartaoCreditoInterface[] = [];
-  clientes: ClienteInterface[] = [];
   subscriptions = new Subscription();
 
   constructor(
-    private contaService: ContaService,
-    private clientesService: ClientesService,
-    private cartaoCreditoService: CartaoCreditoService,
+    private homeService: HomeService,
     private loadingController: LoadingController,
     private alertController: AlertController,
     private toastController: ToastController,) { }
@@ -46,10 +42,9 @@ export class HomeComponent  implements OnInit {
     const busyLoader = await this.loadingController.create({ spinner: 'circular' })
     busyLoader.present()
 
-    const subscriptionConta = this.contaService.findAll()
-      .subscribe(async (contas) => {
-        this.contas = contas;
-        this.findTotalConta();
+    const subscriptionConta = this.homeService.findTotalConta()
+      .subscribe(async (total) => {
+        this.totalConta = total;
         const toast = await this.toastController.create({
           color: 'success',
           position: 'top',
@@ -75,10 +70,9 @@ export class HomeComponent  implements OnInit {
     const busyLoader = await this.loadingController.create({ spinner: 'circular' })
     busyLoader.present()
 
-    const subscriptionConta = this.cartaoCreditoService.findAll()
-      .subscribe(async (cartoes) => {
-        this.cartoes = cartoes;
-        this.findTotalFatura();
+    const subscriptionConta = this.homeService.findTotalCartao()
+      .subscribe(async (total) => {
+        this.totalFatura = total;
         const toast = await this.toastController.create({
           color: 'success',
           position: 'top',
@@ -98,13 +92,5 @@ export class HomeComponent  implements OnInit {
         busyLoader.dismiss();
       });
     this.subscriptions.add(subscriptionConta);
-  }
-
-  findTotalConta() {
-    this.contas.forEach(conta => this.totalConta = this.totalConta + parseInt(conta.saldo))
-  }
-
-  findTotalFatura() {
-    this.cartoes.forEach(cartao => this.totalFatura = this.totalFatura + cartao.valorProximaFatura)
   }
 }
